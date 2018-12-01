@@ -37,7 +37,7 @@
 		<div id=”container” class="movable">
 			<div class="card-header card-header-danger">
 				<h3 id="vitalTitle" class="card-title col-sm-nfv">Patient Vitals/Labs</h3>
-				<h5 id="vitalTitle" class="card-title col-sm-nfv">Click element to graph/expand</h5>				
+				<h5 id="vitalTitle" class="card-title col-sm-nfv">Click element to graph/expand</h5>
 			</div>
 			<div class="card-body table-responsive">
 				<table id="vitalsNew" class="vtTable table table-hover">
@@ -77,7 +77,7 @@
 							<th id="has_hypertension_text" class="vtTableValue" style="cursor: pointer;">N/A</th>
 						</tr>
 					</tbody>
-				</table>				
+				</table>
 			</div>
 		</div>
 	</div>
@@ -86,7 +86,7 @@
 		<div id=”container” class="movable">
 			<div class="card-header card-header-info">
 				<h3 id="dietTitle" class="card-title col-sm-nfv">Personal Diet</h3>
-				<h5 id="vitalTitle" class="card-title col-sm-nfv">Healthy Eating Scores -- click element to graph/expand</h5>				
+				<h5 id="vitalTitle" class="card-title col-sm-nfv">Healthy Eating Scores -- click element to graph/expand</h5>
 			</div>
 			<div class="card-body table-responsive">
 				<table id="dietNew" class="vtTable table">
@@ -122,7 +122,7 @@
 		</div>
 	</div>
 
-	<div class = "row">
+	<div class="row">
 		<div class="col-lg-6 col-md-12">
 			<div id="FoodAllergyCard" class="card">
 				<div id=”container” class="movable">
@@ -135,15 +135,15 @@
 								<th id="allergy-name" class="vtTableLabel">Allergy</th>
 								<th id="allergy-criticality-name" class="vtTableLabel">Criticality</th>
 								<th id="allergy-verification-name" class="vtTableLabel">Verification Status</th>
-								<th id="allergy-onset-name" class="vtTableLabel">Onset</th>						
-							</head>
+								<th id="allergy-onset-name" class="vtTableLabel">Onset</th>
+								</head>
 							<tbody>
 								<tr>
 									<th id="food-allergies-list" class="vtTableValue"></th>
 									<th id="food-allergies-criticality" class="vtTableValue"></th>
 									<th id="food-allergies-verification" class="vtTableValue"></th>
 									<th id="food-allergies-onset" class="vtTableValue"></th>
-								</tr> 
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -162,7 +162,7 @@
 							<thead class="text">
 								<th id="smoking-name" class="vtTableLabel">Tobacco Use</th>
 								<th id="alcohol-name" class="vtTableLabel">Alcohol Consumption</th>
-							</head>
+								</head>
 							<tbody>
 								<tr>
 									<th id="smoking-text" class="vtTableValue"></th>
@@ -188,20 +188,20 @@
 						<th id="allergy-name" class="vtTableLabel">Allergy</th>
 						<th id="allergy-criticality-name" class="vtTableLabel">Criticality</th>
 						<th id="allergy-verification-name" class="vtTableLabel">Verification Status</th>
-						<th id="allergy-onset-name" class="vtTableLabel">Onset</th>						
-					</head>
+						<th id="allergy-onset-name" class="vtTableLabel">Onset</th>
+						</head>
 					<tbody>
 						<tr>
 							<th id="medical-allergies-list" class="vtTableValue"></th>
 							<th id="medical-allergies-criticality" class="vtTableValue"></th>
 							<th id="medical-allergies-verification" class="vtTableValue"></th>
 							<th id="medical-allergies-onset" class="vtTableValue"></th>
-						</tr> 
+						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>	
+	</div>
 
 	<div class="card groceryCard">
 		<div id="grocery-container" class="movable">
@@ -211,7 +211,7 @@
 			<div id="GroceryCardMap" class="card-body table-responsive">
 				<table>
 					<tbody>
-						<tr class="groceryTableLabel">
+						<tr class="groceryTableLabel form-check-inline">
 							<div class="checkbox-inline">
 								<label id='SM_label'><input type="checkbox" id='SM' name="optradio" checked>Supermarkets</label>
 							</div>
@@ -222,13 +222,13 @@
 
 							<div class="checkbox-inline">
 								<label id='CS_label'><input type="checkbox" id='CS' name="optradio" checked>Convenience Stores</label>
-							</div>							
+							</div>
 						</tr>
 					</tbody>
 				</table>
-				<div class="cardBlankBorder GroceryContentsContainer">
-					<div class="leftGrocery" id="map"></div>
-					<div class="rightGrocery">
+				<div class="cardBlankBorder GroceryContentsContainer row">
+					<div class="leftGrocery col-lg-8" id="map"></div>
+					<div class="rightGrocery col-lg-4">
 						<th>Shopping Outlets:</th>
 						<input id="searchInput" class="controls" type="text" placeholder="Enter a location">
 						<table id="groceryTableData" class="groceryTable">
@@ -239,7 +239,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 
 
 

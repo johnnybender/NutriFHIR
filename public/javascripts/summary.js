@@ -7,64 +7,107 @@ populateDietaryData();
 FHIR.oauth2.ready(onReady, onError);
 
 /* HEI Listeners */
-document.getElementById('hei_value')
-    .addEventListener('click', heiHandler_click, false);
-
+try {
+  document.getElementById('hei_value')
+      .addEventListener('click', heiHandler_click, false);
+} catch (err) {
+  console.log(err);
+}
 /* AHEI Listeners */
-document.getElementById('ahei_value')
-    .addEventListener('click', aheiHandler_click, false);
+try {
+  document.getElementById('ahei_value')
+      .addEventListener('click', aheiHandler_click, false);
+} catch (err) {
+  console.log(err);
+}
 
 /* DASH Listeners */
-document.getElementById('dash_value')
-    .addEventListener('click', dashHandler_click, false);
-
+try {
+  document.getElementById('dash_value')
+      .addEventListener('click', dashHandler_click, false);
+} catch (err) {
+  console.log(err);
+}
 /* NutriSavings Listeners */
-document.getElementById('nutrisavings_value')
-    .addEventListener('click', nutrisavingsHandler_click, false);
-
+try {
+  document.getElementById('nutrisavings_value')
+      .addEventListener('click', nutrisavingsHandler_click, false);
+} catch (err) {
+  console.log(err);
+}
 
 /* Height Listener */
-document.getElementById('height-text')
-    .addEventListener('click', heightHandler, false);
-
+try {
+  document.getElementById('height-text')
+      .addEventListener('click', heightHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* Weight Listener */
-document.getElementById('weight-text')
-    .addEventListener('click', weightHandler, false);
-
+try {
+  document.getElementById('weight-text')
+      .addEventListener('click', weightHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* BMI Listener */
-document.getElementById('bmi-score')
-    .addEventListener('click', bmiHandler, false);
-
+try {
+  document.getElementById('bmi-score')
+      .addEventListener('click', bmiHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* Glucose Listener */
-document.getElementById('gluc-score')
-    .addEventListener('click', glucoseHandler, false);
-
+try {
+  document.getElementById('gluc-score')
+      .addEventListener('click', glucoseHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* HbA1c Listener */
-document.getElementById('hba1c-score')
-    .addEventListener('click', hba1cHandler, false);
-
+try {
+  document.getElementById('hba1c-score')
+      .addEventListener('click', hba1cHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* BP Listener */
-document.getElementById('bp-overall')
-    .addEventListener('click', bpHandler, false);
-
+try {
+  document.getElementById('bp-overall')
+      .addEventListener('click', bpHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* Total Cholesterol Listener */
-document.getElementById('chol').addEventListener('click', cholHandler, false);
-
+try {
+  document.getElementById('chol').addEventListener('click', cholHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* HDL Listener */
-document.getElementById('hdl-score')
-    .addEventListener('click', hdlHandler, false);
-
+try {
+  document.getElementById('hdl-score')
+      .addEventListener('click', hdlHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* LDL Listener */
-document.getElementById('ldl-score')
-    .addEventListener('click', ldlHandler, false);
-
+try {
+  document.getElementById('ldl-score')
+      .addEventListener('click', ldlHandler, false);
+} catch (err) {
+  console.log(err);
+}
 /* Toggle Handlers */
-document.getElementById('CS').addEventListener('click', csHandler, false);
+try {
+  document.getElementById('CS').addEventListener('click', csHandler, false);
 
-document.getElementById('SM').addEventListener('click', smHandler, false);
+  document.getElementById('SM').addEventListener('click', smHandler, false);
 
-document.getElementById('FM').addEventListener('click', fmHandler, false);
-
+  document.getElementById('FM').addEventListener('click', fmHandler, false);
+} catch (err) {
+  console.log(err);
+}
 
 function waitForElement() {
   if (pat_addr == 'NA') {
@@ -72,7 +115,9 @@ function waitForElement() {
   } else if (typeof pat_addr !== 'undefined' && pat_addr !== 'NA') {
     // console.log('got patient address for map data!');
     // console.log(pat_addr);
-    plotMap(pat_addr, 'Groceries');
+    if (typeof plotMap === 'function') {
+      plotMap(pat_addr, 'Groceries');
+    }
     // variable exists, do what you want
   } else {
     // console.log("wait");
@@ -80,7 +125,11 @@ function waitForElement() {
   }
 }
 
-waitForElement();
+try {
+  waitForElement();
+} catch (err) {
+  console.log(err);
+}
 
 $(function() {
   $('#summary').sortable({
