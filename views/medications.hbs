@@ -1,0 +1,52 @@
+<!--
+<h2 class="page-header" id="name-text">Medications</h2>
+-->
+<div class="col-lg12 mx-auto" id="summary">
+
+	<div class='custom-tip' style="display:none">
+		<h4 class="tiptitle" id="medTitle"></h4>
+		<b class="tipcontent" id="source"></b><br>
+		<b class="tipcontent" id="dose"></b><br>
+		<b class="tipcontent" id="status"></b>
+	</div>
+
+	<div class="card" id='medicationTimeline'>
+		<div id="medicine-container" class="movable">
+			<div class="card-header card-header-info">
+				<h2 class="card-title col-sm-nfv">Medications</h2>
+				<h5 class="card-title col-sm-nfv">History and dosage (click item for details)</h5>	
+			</div>
+			<div class="card-body">
+				<div class="floating-box">
+					<h4 class="card-title">Source</h4>
+					<label class="radio-inline">
+						<input type="radio" name="filter" id="prac">Practitioner
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="filter" id="pat">Patient
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="filter" id="all" checked="checked">All
+					</label>
+				</div>
+				<div class="floating-box">
+					<h4 class="card-title">Status</h4>
+					<div class="checkbox">
+						<label><input type="checkbox" id="statusCheck" value="">Hide inactive</label>
+					</div>
+				</div>
+				<div id="tooltips">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+<!-- medications.hbs -->
+<script src="/javascripts/medications.js" type="text/javascript"></script>
+<script src="/javascripts/nutriSavingsController.js" type="text/javascript"></script>
+<script src="/javascripts/staticDDP.js" type="text/javascript"></script>
+<script src="/javascripts/summary.js" type="text/javascript"></script>
