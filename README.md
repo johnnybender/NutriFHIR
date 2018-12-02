@@ -30,7 +30,7 @@ The application is SMART on FHIR compliant, and was developed and tested in the 
 it takes 10-15 minutes for the application credentials to be registered in the Cerner Care System. So feel free to set a timer and wait.
 * In the NutriFHIR repository that you have cloned, open ./views/launch.html
 * Update lines 16 and 17 with your new client_id and redirect_uri
-* Navigate back to base directory of repository
+* Navigate back to 'front-end' directory
 * npm install popper.js@^1.12.9
 * npm install
 * nodemon ./bin/www - Your local node server should now be running/hosting the application
