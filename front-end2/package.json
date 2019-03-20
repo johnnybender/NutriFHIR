@@ -2,7 +2,7 @@
   "name": "NutriFHIR-dashboard-react",
   "version": "1.2.0",
   "private": true,
-  "homepage": "https://github.com/pages/johnnybender/NutriFHIR/",
+  "homepage": "https://johnnybender.github.io/NutriFHIR/front-end2/",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "3.3.7",
