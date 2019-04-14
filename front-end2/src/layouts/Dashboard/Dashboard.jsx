@@ -51,7 +51,11 @@ class Dashboard extends Component {
     appState = JSON.parse(appState);
     if (appState === null) {
       this.setAppState('init', '');
+      this.setAppState('patient_name', 'Dummy, Dummy');
       return
+    }
+    if (typeof appState.patient_name === 'undefined') {
+      this.setAppState('patient_name', 'Dummy, Dummy');
     }
     let refreshToken = appState['refresh_token'];
     let token_uri = appState['token_uri']
