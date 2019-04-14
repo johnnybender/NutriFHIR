@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import qs from 'qs';
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 
 class Summary extends Component {
 
@@ -41,7 +41,7 @@ class Summary extends Component {
         props.setAppState('id_token', response.data.id_token)
         props.setAppState('refresh_token', response.data.refresh_token)
         props.setAppState('tenant', response.data.tenant)
-        props.setPatientData('patient_id', patientId);
+        props.setAppState('patient_id', patientId);
         props.saveState();
         self.setState({ done: true })
         
@@ -54,11 +54,10 @@ class Summary extends Component {
     }
   }
   render() {
-    {if (this.state.done)  
-      return (<Redirect to="/dashboard"/>);}
     return (
-      
       <div>
+        {this.state.done &&
+      <Redirect to="/dashboard"/>}
         loading...
         </div>
     );

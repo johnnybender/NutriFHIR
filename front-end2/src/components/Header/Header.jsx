@@ -55,11 +55,12 @@ class Header extends Component {
     return name;
   }
   render() {
+    const {patient_name} = this.props.appState;
     return (
       <Navbar fluid>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">{this.getBrand()}</a>
+            <a href="/">{patient_name}</a>
           </Navbar.Brand>
           <Navbar.Toggle onClick={this.mobileSidebarToggle} />
         </Navbar.Header>

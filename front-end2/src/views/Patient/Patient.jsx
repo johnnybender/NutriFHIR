@@ -11,7 +11,7 @@ class Patient extends Component {
         this.props.loadState();
         this.state = {
             name: "Dummy, Dummy",
-            dob: "2015-01-01",
+            birthDate: "2015-01-01",
             gender: "Male",
             age: "6",
             maritalStatus: "Single",
@@ -19,40 +19,41 @@ class Patient extends Component {
             phone: '(913) 456-5555',
             email: 'owner@nutrifhir.com'
         }
+        this.setLocalPatientData = this.setLocalPatientData.bind(this);
+    }
+    setLocalPatientData = (data) => {
+        let { gender, name, maritalStatus, birthDate, address, telecom } = data.data;
+        name = name[0].text;
+        maritalStatus = maritalStatus && maritalStatus.text;
+        address = address && address[0].text;
+        var ageDifMs = Date.now() - new Date(birthDate).getTime();
+        var ageDate = new Date(ageDifMs);
+        var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        var phone = '', email = '';
+        telecom.forEach(function (arg, index, array) {
+            if (arg.system === "phone") {
+                phone = phone.replace(/[^\d]/g, "");
+                if (phone.length === 10) {
+                    phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+                }
+            } else if (arg.system === "email") {
+                email = arg.value;
+            }
+        });
+        this.setState({ name, birthDate, gender, age, maritalStatus, address, phone, email });
     }
 
-    formatPhone = (phone) => {
-        phone = phone.replace(/[^\d]/g, "");
-        if (phone.length == 10) {
-            return phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
-        }
-        return phone;
-    }
-    
     componentDidMount() {
-        var patient = GetPatient(this.props.patientData, this.props.appState);
-        var self = this;
+        var patient = GetPatient(this.props.appState);
         patient.then((data) => {
-            console.log(data.data);
-            var name = data.data.name[0].text;
-            var dob = data.data.birthDate;
-            var gender = data.data.gender;
-            var ageDifMs = Date.now() - new Date(dob).getTime();
-            var ageDate = new Date(ageDifMs);
-            var age = Math.abs(ageDate.getUTCFullYear() - 1970);
-            var maritalStatus = data.data.maritalStatus.text;
-            var address = data.data.address[0].text;
-            var telecom = data.data.telecom;
-            var phone = '';
-            var email = '';
-            telecom.forEach(function (arg, index, array) {
-                if (arg.system === "phone") {
-                    phone = self.formatPhone(arg.value);
-                } else if (arg.system === "email") {
-                    email = arg.value;
-                }
-            });
-            this.setState({ name, dob, gender, age, maritalStatus, address, phone, email });
+            this.setLocalPatientData(data);
+        }).catch(async (err) => {
+            console.log("error getting patient");
+            console.log(err)
+            await this.props.refreshToken();
+            const data = await GetPatient(this.props.appState)
+                .then((d) => this.setLocalPatientData(data))
+                .catch((err) => { })
         });
     }
 
@@ -77,7 +78,7 @@ class Patient extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {[[this.state.dob, this.state.age, this.state.gender, '', this.state.maritalStatus, '']].map((prop, key) => {
+                                            {[[this.state.birthDate, this.state.age, this.state.gender, '', this.state.maritalStatus, '']].map((prop, key) => {
                                                 return (
                                                     <tr key={key}>
                                                         {prop.map((prop, key) => {
@@ -94,7 +95,7 @@ class Patient extends Component {
                     </Row>
                     <Row>
                         <Col md={12}>
-                        <Card
+                            <Card
                                 title="Contact"
                                 category=""
                                 ctTableFullWidth

@@ -1,17 +1,13 @@
 import axios from 'axios';
 
-export default async function GetMedications(appState, nextUrl = null) {
+export default async function GetProcedures(appState) {
     var dest = appState.iss;
-    var patient = '/MedicationStatement?patient=' + appState.patient_id;
+    var patient = '/Procedure?patient=' + appState.patient_id;
     var uri = dest + patient;
 
     if (typeof appState.patient_id === 'undefined') {
         let errorMessage =  { code : 404, message : 'no patient id' };
         throw errorMessage;
-    }
-
-    if (nextUrl !== null) {
-        uri = nextUrl;
     }
 
     var headers = {

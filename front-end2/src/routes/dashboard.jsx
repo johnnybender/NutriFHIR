@@ -1,15 +1,11 @@
 import Dashboard from "views/Dashboard/Dashboard";
-import UserProfile from "views/UserProfile/UserProfile";
-import TableList from "views/TableList/TableList";
-import Typography from "views/Typography/Typography";
-import Icons from "views/Icons/Icons";
 import Maps from "views/Maps/Maps";
-import Notifications from "views/Notifications/Notifications";
-import Upgrade from "views/Upgrade/Upgrade";
 import LaunchProvider from "views/LaunchProvider/LaunchProvider";
 import Summary from "views/Summary/Summary";
 import Patient from "views/Patient/Patient";
 import Medications from "views/Medications/Medications";
+import Procedures from "views/Procedures/Procedures";
+import ClinicalNotes from "views/ClinicalNotes/ClinicalNotes";
 import Diet from "views/Diet/Diet";
 
 const dashboardRoutes = [
@@ -24,13 +20,6 @@ const dashboardRoutes = [
     name: "Launch Provider",
     icon: "pe-7s-user",
     component: LaunchProvider,
-    noSidebar: true
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "pe-7s-user",
-    component: UserProfile,
     noSidebar: true
   },
   {
@@ -52,36 +41,18 @@ const dashboardRoutes = [
     component: Medications
   },
   {
-    path: "/table",
-    name: "Table List",
-    icon: "pe-7s-note2",
-    component: TableList,
-    noSidebar: true
+    path: "/procedures",
+    name: "Procedures",
+    icon: "pe-7s-date",
+    component: Procedures
   },
   {
-    path: "/typography",
-    name: "Typography",
-    icon: "pe-7s-news-paper",
-    component: Typography,
-    noSidebar: true
+    path: "/clinicalNotes",
+    name: "Clinical Notes",
+    icon: "pe-7s-note",
+    component: ClinicalNotes
   },
-  { path: "/icons", name: "Icons", icon: "pe-7s-science", component: Icons, noSidebar: true},
   { path: "/maps", name: "Environment", icon: "pe-7s-map-marker", component: Maps},
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "pe-7s-bell",
-    component: Notifications,
-    noSidebar: true
-  },
-  {
-    upgrade: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "pe-7s-rocket",
-    component: Upgrade,
-    noSidebar: true
-  },
   {
     path: "/summary",
     name: "summary",

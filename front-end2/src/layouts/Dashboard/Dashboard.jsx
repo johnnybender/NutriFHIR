@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import NotificationSystem from "react-notification-system";
+import { Switch, Redirect } from "react-router-dom";
+import axios from 'axios';
 
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
@@ -13,115 +13,78 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.componentDidMount = this.componentDidMount.bind(this);
-    this.handleNotificationClick = this.handleNotificationClick.bind(this);
     this.handleDoctorToggle = this.handleDoctorToggle.bind(this);
     this.setAppState = this.setAppState.bind(this);
-    this.setPatientData = this.setPatientData.bind(this);
     this.saveState = this.saveState.bind(this);
     this.loadState = this.loadState.bind(this);
+    this.refreshToken = this.refreshToken.bind(this);
+    this.getAppState = this.getAppState.bind(this);
     this.state = {
-      _notificationSystem: null,
       isDoctor: false,
       patientData: {},
-      appState: {}
+      appState: {},
+      patientName: 'Dummy, Dummy',
     };
   }
 
   saveState = () => {
-    localStorage.setItem("appState", JSON.stringify(this.state.appState));
-    localStorage.setItem("patientData", JSON.stringify(this.state.patientData));
+    sessionStorage.setItem("appState", JSON.stringify(this.state.appState));
   }
 
   loadState = () => {
-    var appState = localStorage.getItem("appState");
-    let self = this;
+    var appState = sessionStorage.getItem("appState");
     appState = JSON.parse(appState);
-    if(appState) {
-    Object.keys(appState).forEach(function(key) {
-      self.setAppState(key, appState[key]);
-    });
-  }
-    var patientData = localStorage.getItem("patientData");
-    patientData = JSON.parse(patientData);
-    if(patientData) {
-    Object.keys(patientData).forEach(function(key) {
-      self.setPatientData(key, patientData[key]);
-    });
-  }
+    if (appState) {
+      Object.keys(appState).forEach( (key) => {
+        this.setAppState(key, appState[key]);
+      });
+    }
   }
 
-  setPatientData = (key, value) => {
-    var newPatientData = this.state.patientData;
-    newPatientData[key] = value;
-    this.setState({ patientData : newPatientData });
-    this.saveState();
+  getAppState = () => {
+    var appState = sessionStorage.getItem("appState");
+    return JSON.parse(appState);
+  }
+
+  refreshToken = async () => {
+    var appState = sessionStorage.getItem("appState");
+    appState = JSON.parse(appState);
+    if (appState === null) {
+      this.setAppState('init', '');
+      return
+    }
+    let refreshToken = appState['refresh_token'];
+    let token_uri = appState['token_uri']
+    var headers = {
+      'Accept': 'application/json, text/javascript, */*; q=0.01',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    }
+    var payload = 'grant_type=refresh_token&refresh_token=' + refreshToken;
+    await axios.post(token_uri, payload, { headers: headers })
+      .then(async (response) => {
+        this.setAppState('access_token', response.data.access_token)
+        this.setAppState('id_token', response.data.id_token)
+        this.saveState();
+        return true;
+      }).catch(async (error) => {
+        return false;
+      })
   }
 
   setAppState = (key, value) => {
     var newAppState = this.state.appState;
     newAppState[key] = value;
-    this.setState({ appState : newAppState})
+    this.setState({ appState: newAppState })
     this.saveState();
   }
-
   handleDoctorToggle = () => {
     var isDoctor = this.state.isDoctor;
-    this.setState({ isDoctor: !isDoctor})
+    this.setState({ isDoctor: !isDoctor })
   }
-  handleNotificationClick(position) {
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
-    this.state._notificationSystem.addNotification({
-      title: <span data-notify="icon" className="pe-7s-gift" />,
-      message: (
-        <div>
-          Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
-          every web developer.
-        </div>
-      ),
-      level: level,
-      position: position,
-      autoDismiss: 15
-    });
-  }
+
   componentDidMount() {
-    this.setState({ _notificationSystem: this.refs.notificationSystem });
-    var _notificationSystem = this.refs.notificationSystem;
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
   }
+
   componentDidUpdate(e) {
     if (
       window.innerWidth < 993 &&
@@ -139,31 +102,18 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} handleDoctorToggle={this.handleDoctorToggle}/>
+        <Sidebar {...this.props} handleDoctorToggle={this.handleDoctorToggle} />
         <div id="main-panel" className="main-panel" ref="mainPanel">
-          <Header {...this.props} handleDoctorToggle={this.handleDoctorToggle} />
+          <Header {...this.props} handleDoctorToggle={this.handleDoctorToggle} appState={this.state.appState} />
           <Switch>
             {dashboardRoutes.map((prop, key) => {
-              if (prop.name === "Notifications")
-                return (
-                  <Route
-                    path={prop.path}
-                    key={key}
-                    render={routeProps => (
-                      <prop.component
-                        {...routeProps}
-                        handleClick={this.handleNotificationClick}
-                      />
-                    )}
-                  />
-                );
               if (prop.redirect)
                 return <Redirect from={prop.path} to={prop.to} key={key} />;
-          
               return (
                 <PropsRoute path={prop.path} component={prop.component} key={key} isDoctor={this.state.isDoctor}
-                  setAppState={this.setAppState} appState={this.state.appState} patientData={this.state.patientData} 
-                  setPatientData={this.setPatientData} saveState={this.saveState} loadState={this.loadState} />
+                  setAppState={this.setAppState} appState={this.state.appState} patientData={this.state.patientData}
+                  saveState={this.saveState} loadState={this.loadState}
+                  refreshToken={this.refreshToken} getAppState={this.getAppState} />
               );
             })}
           </Switch>
