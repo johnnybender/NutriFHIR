@@ -226,8 +226,8 @@ class Dashboard extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title={this.state.name}
-                category="Demographics"
+                title={'Demographics'}
+                category=""
                 ctTableFullWidth
                 ctTableResponsive
                 content={
@@ -260,7 +260,7 @@ class Dashboard extends Component {
             <Col md={6}>
               <Card
                 title={"Food Allergies"}
-                category="from food"
+                category=""
                 ctTableFullWidth
                 ctTableResponsive
                 content={
@@ -292,8 +292,8 @@ class Dashboard extends Component {
           <Row>
             <Col md={12}>
               <Card
-                title={"Allergies"}
-                category="from food and stuff"
+                title={"Drug Allergies"}
+                category=""
                 ctTableFullWidth
                 ctTableResponsive
                 content={
@@ -326,7 +326,7 @@ class Dashboard extends Component {
             <Col md={12}>
               <Card
                 title={"Observations"}
-                category="You know, looking at stuff"
+                category=""
                 ctTableFullWidth
                 ctTableResponsive
                 content={
@@ -360,7 +360,7 @@ class Dashboard extends Component {
             <Col md={12}>
               <Card
                 title={"Observations Tabs"}
-                category="You know, looking at stuff"
+                category=""
                 ctTableFullWidth
                 ctTableResponsive
                 content={

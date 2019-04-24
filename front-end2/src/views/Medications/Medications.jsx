@@ -66,8 +66,8 @@ class Medications extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title={this.state.name}
-                                category="Medication"
+                                title={"Medication"}
+                                category=""
                                 ctTableFullWidth
                                 ctTableResponsive
                                 content={

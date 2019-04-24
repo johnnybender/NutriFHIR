@@ -26,7 +26,7 @@ class ClinicalNotes extends Component {
                 var {id, type, status, docStatus, description, created} = entry.resource;
                 let text = type.text;
                 docStatus = docStatus.text;
-                clinicalNotesTable.push([id, text, status, docStatus, description, created]);
+                clinicalNotesTable.push([id, created, null, null, docStatus, text, description]);
             })
             this.setState({ clinicalNotesTable });
     }
@@ -50,8 +50,8 @@ class ClinicalNotes extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title={'also clinical notes'}
-                                category="Clinical Notes"
+                                title={'Clinical Notes'}
+                                category=""
                                 ctTableFullWidth
                                 ctTableResponsive
                                 content={

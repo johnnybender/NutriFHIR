@@ -49,8 +49,8 @@ class Procedures extends Component {
                     <Row>
                         <Col md={12}>
                             <Card
-                                title={'also procedures'}
-                                category="Procedures"
+                                title={'Procedures'}
+                                category=""
                                 ctTableFullWidth
                                 ctTableResponsive
                                 content={
